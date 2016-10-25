@@ -40,3 +40,10 @@ function containsWhitespace( testString ){
 	else
 		return false;
 }
+
+$("#word2").keypress(function(event) {
+    if(event.which == 13) {
+        event.preventDefault();
+        $("#form").click();
+    }
+})

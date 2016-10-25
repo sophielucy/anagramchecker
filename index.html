@@ -15,6 +15,7 @@
       }
     </style>
     <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
   </head>
 
@@ -30,7 +31,7 @@
 
     <div class="container">
       <h1>Anagram Checker</h1>
-      <form>
+      <form id="form">
 		<fieldset>
 		<legend>Is the word you're thinking of an anagram?</legend>
 		<label>Enter the word here</label>
@@ -40,7 +41,6 @@
 	    <input type="text" placeholder="Type something" id="word2">
 	    <br>
     	<button type="button" class="btn" onclick="isAnagram(word1,word2)">Submit</button>
-
 	    </fieldset>
     </form> 
     </div> 
