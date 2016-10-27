@@ -1,18 +1,31 @@
-function isAnagram(word, testWord) {
+function isAnagram() {
 
-    //get words from html form and make strings lower case
-    word = $("#word1").val();
-    testWord = $("#word2").val();
+    //get words from html form
+    var word = $("#word1").val();
+    var testWord = $("#word2").val();
+
+    //make the words lowercase so that check is case insensitive
+    word = word.toLowerCase();
+    testWord = testWord.toLowerCase();
 
     //check if there is input in both fields
-    if(word==""||testWord==""){
+    if(word===""||testWord===""){
         window.alert("Please enter a word in both fields");
-        return false;
+        return;
     }
 
-    //make sure there are no spaces in the string
-    if (containsWhitespace(word) == true || containsWhitespace(testWord) == true) {
-        window.alert("Please eliminate all spaces from your input");
+    //check if words are the same
+    if(word===testWord){
+        $(".results").empty();
+        $("<p>SUCCESS! AN ANAGRAM WAS BORN!</p>").appendTo(".results");
+        return;
+    }
+
+    //make sure that the word consists of only letters, no numbers or symbols
+    if (isAlpha(word) == false || isAlpha(testWord) == false) {
+        $(".results").empty();
+        window.alert("Please enter words made up of letters and spaces only");
+        return;
     }
 
     //split the words into arrays of chars
@@ -20,46 +33,43 @@ function isAnagram(word, testWord) {
     var wordArray = word.split("");
 
     //sort the arrays
-    var sortedTest = testArray.sort();
-    var sortedWord = wordArray.sort();
+    testArray = testArray.sort();
+    wordArray = wordArray.sort();
     
     //check the length of both arrays
-    if(sortedWord.length == sortedTest.length){
+    if(wordArray.length == testArray.length){
         //check each of the elements to check for exact match
-        for(var i=0, l=sortedWord.length; i<l; i++){
-            if(sortedWord[i]!=sortedTest[i]){
-                window.alert("Oh no! Those words are not anagrams of each other :(");
-                return false;        
-
+        for(var i=0, l=wordArray.length; i<l; i++){
+            if(wordArray[i]!==testArray[i]){
+                $(".results").empty();
+                $("<p>Oh no! Those words are not anagrams of each other :(</p>").appendTo(".results");
+                return;        
             }
         }
-        window.alert("SUCCESS! AN ANAGRAM WAS BORN!");
-        return true;
+        $(".results").empty();
+        $("<p>SUCCESS! AN ANAGRAM WAS BORN!</p>").appendTo(".results");
+        return;
     }
     
     else {
-        window.alert("Oh no! Those words are not anagrams of each other :(");
-        return false;
+        $(".results").empty();
+        $("<p>Oh no! Those words are not anagrams of each other :(</p>").appendTo(".results");
+        return;
     }
 }
 
-function containsWhitespace(testString) {
-    if (testString.indexOf(' ') >= 0)
+function isAlpha(testString) {
+    var pattern = new RegExp(/^[a-z\s]+$/i);
+    if (pattern.test(testString))
         return true;
     else
         return false;
 }
 
-$("#word1").keypress(function(event) {
+$("#word1,#word2").keypress(function(event) {
     if (event.which == 13) {
         event.preventDefault();
-        isAnagram(word1, word2);
+        isAnagram();
     }
 })
 
-$("#word2").keypress(function(event) {
-    if (event.which == 13) {
-        event.preventDefault();
-        isAnagram(word1, word2);
-    }
-})

@@ -27,15 +27,14 @@
         <h1>Anagram Checker</h1>
         <form id="form">
             <fieldset>
-                <legend>Is the word you're thinking of an anagram?</legend>
+                <legend>Are the words you're thinking of anagrams?</legend>
                 <label>Enter a word here</label>
                 <input type="text" placeholder="Type something" id="word1">
-                <!--      <span class="help-block">Example block-level help text here.</span>
- -->
                 <label>Enter another word here</label>
                 <input type="text" placeholder="Type something" id="word2">
                 <br>
-                <button type="button" class="btn" onclick="isAnagram(word1,word2)">Submit</button>
+                <div class="results"></div>
+                <button type="button" class="btn" onclick="isAnagram()">Submit</button>
             </fieldset>
         </form>
     </div>
